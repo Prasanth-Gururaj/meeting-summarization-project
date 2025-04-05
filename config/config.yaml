@@ -1,0 +1,46 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_dataset: "samsum"
+  train_data_path: artifacts/data_ingestion/train.csv
+  validation_data_path: artifacts/data_ingestion/validation.csv
+  test_data_path: artifacts/data_ingestion/test.csv
+  use_vector_db: true
+  vector_db_path: artifacts/data_ingestion/vector_db
+  embedding_model_name: "all-MiniLM-L6-v2"
+
+model_preparation:
+  root_dir: artifacts/model_preparation
+  transcription_model_id: "distil-whisper/distil-small.en"
+  llm_model_id: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  quantization: true
+  quantization_bits: 4  # 4-bit quantization for RAM efficiency
+  transcription_model_path: artifacts/model_preparation/transcription_model
+  llm_model_path: artifacts/model_preparation/llm_model
+
+model_training:
+  root_dir: artifacts/model_training
+  use_finetuning: true
+  lr: 2e-5
+  num_epochs: 3
+  train_batch_size: 4
+  eval_batch_size: 4
+  save_steps: 500
+  model_save_path: artifacts/model_training/finetuned_model
+  use_peft: true  # Parameter-Efficient Fine-Tuning for low RAM
+  
+audio_processing:
+  root_dir: artifacts/audio_processing
+  audio_samples_dir: artifacts/audio_processing/samples
+  transcripts_dir: artifacts/audio_processing/transcripts
+  max_audio_length_sec: 600  # 10 minutes max audio length
+  
+meeting_summarization:
+  root_dir: artifacts/meeting_summarization
+  summaries_dir: artifacts/meeting_summarization/summaries
+  action_items_dir: artifacts/meeting_summarization/action_items
+  max_summary_length: 500
+  max_action_items: 10
+
+

@@ -1,0 +1,40 @@
+# Vector Database parameters
+vector_db:
+  chunk_size: 512
+  chunk_overlap: 50
+
+# Transcription parameters
+transcription:
+  chunk_length_s: 10
+  batch_size: 1
+  language: "en"
+  return_timestamps: true
+
+# LLM parameters
+llm:
+  max_new_tokens: 256
+  temperature: 0.3
+  top_p: 0.9
+  repetition_penalty: 1.1
+  
+# Fine-tuning parameters
+fine_tuning:
+  learning_rate: 2e-5
+  warmup_steps: 100
+  weight_decay: 0.01
+  gradient_accumulation_steps: 8  # To fit in 8GB RAM
+  lora_r: 8  # LoRA rank
+  lora_alpha: 16  # LoRA alpha
+  lora_dropout: 0.1  # LoRA dropout
+
+# Audio processing parameters
+audio:
+  sample_rate: 16000
+  normalize_audio: true
+  
+# Summarization parameters
+summarization:
+  min_length: 50
+  max_length: 500
+  use_beam_search: false
+  action_item_threshold: 0.7
