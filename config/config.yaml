@@ -43,4 +43,13 @@ meeting_summarization:
   max_summary_length: 500
   max_action_items: 10
 
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  train_data_path: artifacts/data_ingestion/train.csv
+  validation_data_path: artifacts/data_ingestion/validation.csv
+  test_data_path: artifacts/data_ingestion/test.csv
+  model_name: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+  max_input_length: 512
+  max_target_length: 128
+
 

@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 from src.meeting_summarizer.constants import *
 from src.meeting_summarizer.utils.common import read_yaml, create_directories
-from src.meeting_summarizer.entity.config_entity import DataIngestionConfig
+from src.meeting_summarizer.entity.config_entity import (DataIngestionConfig, 
+                                                         DataPreprocessingConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -32,3 +33,27 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+
+    def get_data_preprocessing_config(self) -> DataPreprocessingConfig:
+        config = self.config.data_preprocessing
+
+        create_directories([config.root_dir])
+
+        # Get the actual paths (not the template strings)
+        train_path = Path(os.path.expandvars(config.train_data_path))
+        val_path = Path(os.path.expandvars(config.validation_data_path))
+        test_path = Path(os.path.expandvars(config.test_data_path))
+
+        # In your configuration.py
+        # In your configuration.py
+        data_preprocessing_config = DataPreprocessingConfig(
+            root_dir=Path(config.root_dir),
+            train_data_path=Path(config.train_data_path),
+            validation_data_path=Path(config.validation_data_path),
+            test_data_path=Path(config.test_data_path),
+            model_name=config.model_name,
+            max_input_length=int(config.get('max_input_length', 512)),  # Default fallback
+            max_target_length=int(config.get('max_target_length', 128))  # Default fallback
+        )
+
+        return data_preprocessing_config

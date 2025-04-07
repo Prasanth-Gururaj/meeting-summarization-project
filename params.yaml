@@ -1,3 +1,9 @@
+# Model parameters
+model:
+  max_input_length: 1024
+  max_target_length: 256
+  model_name: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"  # Add this if not in config.yaml
+
 # Vector Database parameters
 vector_db:
   chunk_size: 512
@@ -10,31 +16,33 @@ transcription:
   language: "en"
   return_timestamps: true
 
-# LLM parameters
-llm:
+# LLM generation parameters
+generation:
   max_new_tokens: 256
   temperature: 0.3
   top_p: 0.9
   repetition_penalty: 1.1
   
 # Fine-tuning parameters
-fine_tuning:
+training:
   learning_rate: 2e-5
   warmup_steps: 100
   weight_decay: 0.01
-  gradient_accumulation_steps: 8  # To fit in 8GB RAM
-  lora_r: 8  # LoRA rank
-  lora_alpha: 16  # LoRA alpha
-  lora_dropout: 0.1  # LoRA dropout
+  gradient_accumulation_steps: 8
+  lora:
+    r: 8       # LoRA rank
+    alpha: 16   # LoRA alpha
+    dropout: 0.1
 
-# Audio processing parameters
+# Audio processing
 audio:
   sample_rate: 16000
-  normalize_audio: true
+  normalize: true
   
-# Summarization parameters
+# Summarization
 summarization:
-  min_length: 50
-  max_length: 500
+  length:
+    min: 50
+    max: 500
   use_beam_search: false
   action_item_threshold: 0.7
